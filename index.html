@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PEWPEW</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <link rel="stylesheet" href="css/boo.min.css">
+    <link rel="stylesheet" href="css/app.css">
+</head>
+
+<body>
+    <div id="app">
+        <section class="row">
+            <div class="small-6 columns">
+                <h1 class="text-center">
+                    YOU
+                </h1>
+                <img src="img/20-hinh-anh-anime-cho-dien-thoai-buon-nhat-cua-nu-gioi-1.jpg" alt=""
+                    style="height: 500px;width: 100%;">
+                <div class="healthbar mt-2">
+                    <div class="healthbar text-center" style="background-color: red;margin: 0;color: white;"
+                        v-bind:style="{width:playerHealth + '%'}">
+                        {{playerHealth}}
+                    </div>
+                </div>
+            </div>
+            <div class="small-6 columns">
+                <h1 class="text-center">
+                    MONTER
+                </h1>
+                <img src="img/7008a211129ab1d59bdfaa5b636e6ef8.jpg" alt="" style="height: 500px;width: 100%;">
+                <div class="healthbar mt-2">
+                    <div class="healthbar text-center" style="background-color: red;margin: 0;color: white;"
+                        v-bind:style="{width:monterHealth + '%'}">
+
+                        {{monterHealth}}
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- v-if sẽ hoạt động revmove cả thẻ mẹ // cùng thẻ v-if v-else // 
+           
+        -->
+        <section class="row controls" v-if="!gameisRunning">
+            <div class="small-12 columns">
+                <!--  cũng có thể viết như vậy nếu chỉ muốn nó đổi thành true thôi
+         <button id="start-game" @click="gameisRunning = true "> -->
+                <button id="start-game" @click="startNewGame">
+                    START NEW GAME
+                </button>
+            </div>
+        </section>
+        <section class="row controls" v-else="">
+            <div class="small-12 columns">
+                <button id="attack" @click="attack">ATTACK</button>
+                <button id="special-attack" @click="specialAttack">SPECIAL ATTACK</button>
+                <button id="heal" @click="heal">HEAL</button>
+                <button id="give-up" @click="giveUp">GIVE UP</button>
+            </div>
+        </section>
+        <section class="row log" v-if="logTurn.length > 0 ">
+            <div class="small-12 columns">
+                <ul>
+                    <li v-for="turn in logTurn"
+                        v-bind:class="{'monter-turn':!turn.isPlayer, 'player-turn':turn.isPlayer,}">
+                        {{turn.textLog}}
+                    </li>
+                </ul>
+            </div>
+        </section>
+    </div>
+    <script src="app.js"></script>
+</body>
+
+</html>
